@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ff6a88, #ff99ac);
+        font-family: Arial, sans-serif;
+        color: white;
+        overflow: hidden;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        width: 320px;
+        position: relative;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+
+    .buttons {
+        margin-top: 30px;
+        height: 60px;
+        position: relative;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 1em;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        width: 120px;           /* lock width */
+        box-sizing: border-box;
+    }
+
+    #yes {
+        left: 30px;
+        background: #ff4d6d;
+        color: white;
+        position: absolute;
+    }
+
+    #no {
+        right: 30px;
+        background: white;
+        color: #ff4d6d;
+        position: absolute;    /* 👈 starts inside box */
+        transition: left 0.15s ease, top 0.15s ease;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1>Hey My Love ❤️</h1>
+    <p>Will you be my Valentine? 💖</p>
+
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">Yes 💕</button>
+        <button id="no" onmouseover="moveNo()">No 😜</button>
+    </div>
+</div>
+
+<script>
+    function moveNo() {
+        const noBtn = document.getElementById("no");
+
+        /* switch to fixed only when moving */
+        noBtn.style.position = "fixed";
+
+        const padding = 20;
+
+        const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+        const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+    }
+
+    function yesClicked() {
+        document.getElementById("card").innerHTML = `
+            <h1>Yayyyy!!! ❤️</h1>
+            <p>
+                You just made me the happiest person 🥰<br><br>
+                Happy Valentine’s Day 💞
+            </p>
+        `;
+    }
+</script>
+
+</body>
+</html>
