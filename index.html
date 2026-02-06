@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Be My Valentine ❤️</title>
 
 <style>
     body {
         margin: 0;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -15,55 +16,71 @@
         font-family: Arial, sans-serif;
         color: white;
         overflow: hidden;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
     .card {
         background: rgba(255, 255, 255, 0.15);
-        padding: 40px;
+        padding: 30px;
         border-radius: 20px;
         text-align: center;
         box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-        width: 320px;
+        width: 100%;
+        max-width: 360px;
         position: relative;
     }
 
     h1 {
         margin-bottom: 10px;
+        font-size: clamp(1.5rem, 5vw, 2rem);
     }
 
     p {
-        font-size: 1.2em;
+        font-size: clamp(1rem, 4vw, 1.2rem);
     }
 
     .buttons {
-        margin-top: 30px;
+        margin-top: 25px;
         height: 60px;
         position: relative;
     }
 
     button {
-        padding: 12px 25px;
-        font-size: 1em;
+        padding: 12px 20px;
+        font-size: 1rem;
         border: none;
         border-radius: 30px;
         cursor: pointer;
-        width: 120px;           /* lock width */
+        width: 110px;
         box-sizing: border-box;
+        touch-action: manipulation;
     }
 
     #yes {
-        left: 30px;
+        left: 0;
         background: #ff4d6d;
         color: white;
         position: absolute;
     }
 
     #no {
-        right: 30px;
+        right: 0;
         background: white;
         color: #ff4d6d;
-        position: absolute;    /* 👈 starts inside box */
+        position: absolute;
         transition: left 0.15s ease, top 0.15s ease;
+    }
+
+    /* 📱 Mobile spacing */
+    @media (max-width: 480px) {
+        .buttons {
+            height: 70px;
+        }
+
+        button {
+            width: 100px;
+        }
     }
 </style>
 </head>
@@ -76,7 +93,10 @@
 
     <div class="buttons">
         <button id="yes" onclick="yesClicked()">Yes 💕</button>
-        <button id="no" onmouseover="moveNo()">No 😜</button>
+        <button id="no"
+            onmouseover="moveNo()"
+            ontouchstart="moveNo()"
+        >No 😜</button>
     </div>
 </div>
 
@@ -84,7 +104,6 @@
     function moveNo() {
         const noBtn = document.getElementById("no");
 
-        /* switch to fixed only when moving */
         noBtn.style.position = "fixed";
 
         const padding = 20;
